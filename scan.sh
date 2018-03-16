@@ -1,3 +1,4 @@
+#!/bin/bash
 arp-scan \
   --interface=wlan0 \
   --retry=2 \
