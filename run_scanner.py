@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from subprocess import call
+from subprocess import call, check_output
 
 def read_mac_addresses():
     devices = []
@@ -18,7 +18,11 @@ def read_mac_addresses():
 def scan_for_devices(devices):
     for mac_address, description in devices:
         print("Scanning for " + description + "...")
-        call(["./scan.sh", mac_address])
+        result = check_output(["./scan.sh", mac_address]).strip()
+        if result == b'1':
+            print("Present and accounted for!")
+        else:
+            print("Gone with the wind!")
 
 
 devices = read_mac_addresses()
